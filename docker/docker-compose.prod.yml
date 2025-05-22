@@ -9,11 +9,7 @@ services:
     env_file:
       - ../.env.production
     depends_on:
-      - mongo
       - rabbitmq
-
-  mongo:
-    container_name: mongo-prod
 
   rabbitmq:
     container_name: rabbitmq-prod

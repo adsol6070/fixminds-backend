@@ -17,4 +17,4 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/package*.json ./
 RUN npm install --production
 
-CMD ["node", "dist/server.js"]
+CMD ["node", "dist/main.js"]

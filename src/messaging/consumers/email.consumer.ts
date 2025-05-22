@@ -15,13 +15,6 @@ export const consumeEmailQueue = async () => {
     if (msg) {
       const payload: EmailPayload = JSON.parse(msg.content.toString());
       try {
-        if (payload.attachments) {
-          payload.attachments = payload.attachments.map((att) => ({
-            ...att,
-            content: typeof att.content === 'string' ? Buffer.from(att.content, 'base64') : att.content,
-          }));
-        }
-
         await sendEmail(payload);
         console.info(`Email sent to ${payload.to}`);
         channel.ack(msg);
