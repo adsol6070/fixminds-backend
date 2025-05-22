@@ -42,7 +42,7 @@ const createQuote = async (req: Request, res: Response) => {
 
  const referralLink = `${process.env.FORM_URL}/index.html?ref=${createdQuote._id}`;
 
-  const pdfBuffer = await generateQuotePdfBuffer(createdQuote.toObject());
+  const pdfBuffer = await generateQuotePdfBuffer(req.body);
   const base64PDF = pdfBuffer.toString("base64");
 
  await publishEmail("email.quote", {
