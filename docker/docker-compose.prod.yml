@@ -1,0 +1,19 @@
+services:
+  app:
+    container_name: my-app
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    ports:
+      - "5000:5000"
+    env_file:
+      - ../.env.production
+    depends_on:
+      - mongo
+      - rabbitmq
+
+  mongo:
+    container_name: mongo-prod
+
+  rabbitmq:
+    container_name: rabbitmq-prod
