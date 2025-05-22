@@ -7,7 +7,7 @@ import { ApiError } from "./common/utils/api-error";
 
 const app = express();
 
-const allowedOrigins = ["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5500"];
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [];
 
 app.use(
   cors({
@@ -21,13 +21,7 @@ app.use(
     credentials: true,
   })
 );
-// Middlewares
-// app.use(
-//   cors({
-//     origin: process.env.ORIGIN,
-//     credentials: true,
-//   })
-// );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
