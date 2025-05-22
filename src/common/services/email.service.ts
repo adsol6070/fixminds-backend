@@ -24,13 +24,17 @@ export const sendEmail = async ({
     contentType: att.contentType,
   }));
 
-  await mailTransporter.sendMail({
+  const mailOptions: any = {
     from: `"FixMinds Insurance INC" <no-reply@yourapp.com>`,
     to,
     subject,
     html: finalHtml,
-    attachments: transformedAttachments,
-  });
+    ...(transformedAttachments?.length && {
+      attachments: transformedAttachments,
+    }),
+  };
+
+  await mailTransporter.sendMail(mailOptions);
 
   console.info(`Email sent: ${subject} -> ${to}`);
 };
